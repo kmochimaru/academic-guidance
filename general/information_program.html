@@ -1,0 +1,20 @@
+<br><br>
+<h4 class="center-align">ข้อมูลหลักสูตร</h4>
+<div class="col m6 offset-m3">
+    <table width="1500" class="highlight bordered centered hoverable responsive-table">
+        <thead>
+	  		<th width="321">รหัสหลักสูตร</th>
+            <th width="500">ชื่อหลักสูตร</th>
+            <th width="294">รหัสคณะ</th>
+            <th width="300">ตรวจสอบรายละเอียดหลักสูตร</th>
+        <td></thead>
+        <tbody>
+            <tr ng-repeat="program in AllProgram">
+                <td>{{ program.program_id }}</td>
+                <td>{{ program.program_name }}</td>
+                <td>{{ program.faculty_id }}</td>
+                <td><a href="#information_program/{{program.program_id}}"><i class="material-icons">library_books</i></a></td>
+          <td>&nbsp;</td></tr>
+        </tbody>
+  </table>
+</div>

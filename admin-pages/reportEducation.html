@@ -1,0 +1,28 @@
+<!-- left menu -->
+<div class="col s12 m5 l3 center-align" ng-include src="'admin-pages/views/left-menu.html'"></div>
+<!-- right content -->
+<h4 class="center-align">รายงานจำแนกตามแผนการเรียน</h4>
+<div class="content col s12 m7 l9 center-align">
+    <table class="striped hoverable">
+        <thead>
+            <tr>
+                <th class="center-align">ชื่อแผนการเรียน</th>
+                <th class="center-align">จำนวนนักเรียน (คน)</th>
+                <th class="center-align">จำนวนนักเรียน (เปอร์เซ็น)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="education in report">
+                <td class="left" style="margin-left: 50px;">{{ education.education_plan }}</td>
+                <td class="center-align">{{ education.count }}</td>
+                <td class="center-align">{{ (education.count / countAll) * 100 | number: 2 }} %</td>
+            </tr>
+            <tr>
+                <td class="left" style="margin-left: 50px;"><b>จำนวนนักเรียนทั้งหมด</b></td>
+                <td class="center-align"><b>{{ countAll }}</b></td>
+                <td class="center-align"><b>100 %</b></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

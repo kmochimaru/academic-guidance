@@ -1,0 +1,84 @@
+<br>
+<br>
+<div class="col s12 m6 offset-m3 z-depth-4">
+    <h4 class="center-align">ลงทะเบียนเป็นสมาชิก</h4>
+    <form ng-submit="register(reg)">
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="first_name" type="text" ng-model="reg.name" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อ')"
+                    oninput="setCustomValidity('')">
+                <label for="first_name">ชื่อ</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="last_name" type="text" ng-model="reg.surname" required="required" oninvalid="this.setCustomValidity('กรุณากรอกนามสกุล')"
+                    oninput="setCustomValidity('')">
+                <label for="last_name">นามสกุล</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">email</i>
+                <input id="email" name="email" type="email" ng-model="reg.email" required="required" oninvalid="this.setCustomValidity('กรุณาตรวจสอบอีกเมลอีกครั้ง')"
+                    oninput="setCustomValidity('')">
+                <label for="email">อีเมล</label>
+            </div>
+            <div class="col s12 m6" style="padding-top: 16px;">
+                <select name="education_plan" id="education_plan" ng-model="reg.education_plan" ng-init="reg.education_plan = ''" material-select>
+                    <option value="" disabled selected>เลือกแผนการศึกษา</option>
+                    <option ng-repeat="value in select_education">{{value}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">vpn_key</i>
+                <input id="password" name="password" type="password" class="validate" ng-model="reg.password" required="required" oninvalid="this.setCustomValidity('รูปแบบรหัส ตัวเล็ก ตัวเลข อย่างน้อย 8 ตัวอักษร')"
+                    oninput="setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
+                <label for="password">รหัสผ่าน</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="confirm_password" name="confirm_password" type="password" ng-model="reg.confirm_password" required="required"
+                    validation-error="reg.confirm_password != reg.password ? 'รหัสผ่านไม่ตรงกัน' : ''">
+                <label for="confirm_password">ยืนยันรหัสผ่าน</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m5" style="text-align: left; margin-top: 20px">
+                <i class="material-icons">wc</i> &nbsp;
+                <input class="with-gap" name="regis_gender" type="radio" id="r1" value="ชาย" ng-model="reg.gender" ng-init="reg.gender = ''">
+                <label for="r1">ชาย</label>
+                <input class="with-gap" name="regis_gender" type="radio" id="r2" value="หญิง" ng-model="reg.gender" ng-init="reg.gender = ''">
+                <label for="r2">หญิง</label>
+            </div>
+        </div>
+        <div class="row"> </div>
+        <div class="row center-align">
+            <input type="hidden" name="level" id="level" ng-model="reg.level" ng-init="reg.level = 'นักเรียน'">
+            <button type="submit" class="waves-effect waves-light btn" ng-disabled="reg.gender == '' || reg.education_plan == '' ">
+                ลงทะเบียน
+            </button>
+        </div>
+    </form>
+
+    <!-- Modal Structure -->
+    <div id="confirmRegister" class="modal">
+        <div class="modal-content">
+            <h4>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนสมัครสมาชิก</h4>
+            <p>ชื่อ : {{ reg.name }}</p>
+            <p>นามสกุล : {{ reg.surname }}</p>
+            <p>อีเมล : {{ reg.email }}</p>
+            <p>แผนการศึกษา : {{ reg.education_plan }}</p>
+            <p>เพศ : {{ reg.gender }}</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat" ng-click="confirmRegister()">ยืนยัน</a>
+            <a class="modal-close waves-effect waves-red btn-flat">ยกเลิก</a>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.modal').modal()
+    });
+</script>

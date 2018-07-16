@@ -1,0 +1,234 @@
+<!-- left menu -->
+<div class="col s12 m5 l3 center-align" ng-include src="'admin-pages/views/left-menu.html'"></div>
+<!-- right content -->
+<div class="content col s12 m7 l9 center-align">
+    <div>
+        <h3>จัดการข้อมูลสมาชิก</h3>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s8 m6 l5">
+                        <i class="material-icons prefix">search</i>
+                        <input id="icon_prefix" type="text" placeholder="ค้นหาสมาชิก" ng-model="search">
+                    </div>
+                    <div class="col s2 m6 l7 right-align" style="padding-right: 60px;">
+                        <button class="btn-floating btn-large pink waves-effect modal-trigger" href="#add_member">
+                            <i class="large material-icons">person_add</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="highlight bordered centered hoverable responsive-table">
+            <thead>
+                <tr>
+                    <th ng-click="sort('first_name')">ชื่อ
+                        <i class="material-icons" ng-show="sortKey=='first_name'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='first_name'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th ng-click="sort('last_name')">นามสกุล
+                        <i class="material-icons" ng-show="sortKey=='last_name'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='last_name'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th ng-click="sort('email')">อีเมล
+                        <i class="material-icons" ng-show="sortKey=='email'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='email'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th ng-click="sort('gender')">เพศ
+                        <i class="material-icons" ng-show="sortKey=='gender'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='gender'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th ng-click="sort('education_plan')">แผนการเรียน
+                        <i class="material-icons" ng-show="sortKey=='education_plan'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='education_plan'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th>แก้ไข/ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="user in Allusers | orderBy:sortKey:reverse | filter:search | itemsPerPage:size">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.gender }}</td>
+                    <td>{{ user.education_plan }}</td>
+                    <td>
+                        <button class="btn-floating waves-effect tooltipped modal-trigger" href="#edit_member" ng-click="detailUser(user.email)">
+                            <i class="large material-icons">mode_edit</i>
+                        </button>
+                        <button class="btn-floating red waves-effect tooltipped modal-trigger" href="#remove_member" ng-click="deleteUser(user.email)">
+                            <i class="large material-icons">remove</i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="Allusers == 0">
+                    <td colspan="6" class="data-empty">
+                        <h4 class="red-text">ยังไม่มีข้อมูลสมาชิก</h4>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div ng-show="Allusers != 0" class="input-field col s4 m2">
+            <select ng-model="size" ng-init="size = 5" material-select>
+                <option value="5" class="center-align">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        <dir-pagination-controls class="right" max-size="5" direction-links="true" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+        </dir-pagination-controls>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div id="add_member" class="modal">
+    <form class="col s12" name="formAddMeber" ng-submit="addMember(users)">
+        <div class="modal-content">
+            <h4>เพิ่มสมาชิก</h4>
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="first_name" type="text" class="validate" ng-model="users.name" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อ')"
+                            oninput="setCustomValidity('')">
+                        <label for="first_name">ชื่อ</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="last_name" type="text" class="validate" ng-model="users.surname" required="required" oninvalid="this.setCustomValidity('กรุณากรอกนามสกุล')"
+                            oninput="setCustomValidity('')">
+                        <label for="last_name">นามสกุล</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" name="email" type="email" class="validate" ng-model="users.email" required="required" oninvalid="this.setCustomValidity('กรุณาตรวจสอบอีเมลอีกครั้ง')"
+                            oninput="setCustomValidity('')">
+                        <label for="email">อีเมล</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input id="password" name="password" type="password" class="validate" ng-model="users.password" required="required" oninvalid="this.setCustomValidity('รูปแบบรหัส ตัวเล็ก ตัวเลข อย่างน้อย 8 ตัวอักษร')"
+                            oninput="setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
+                        <label for="password">รหัสผ่าน</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">account_balance</i>
+                        <select name="education_plan" id="education_plan" ng-disabled="users.level == 'ผู้ดูแลระบบ'" ng-model="users.education_plan"
+                            material-select>
+                            <option value="" disabled selected>เลือกแผนการศึกษา</option>
+                            <option ng-repeat="value in select_education">{{value}}</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">people</i>
+                        <select name="level" id="level" ng-model="users.level" material-select>
+                            <option value="" disabled selected>เลือกระดับผู้ใช้</option>
+                            <option ng-repeat="value in level">{{value}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="material-icons" style="margin-left: 10px;">wc</i> &nbsp;
+                    <input class="with-gap" name="add_gender" type="radio" id="r1" value="ชาย" ng-model="users.gender">
+                    <label for="r1">ชาย</label>
+                    <input class="with-gap" name="add_gender" type="radio" id="r2" value="หญิง" ng-model="users.gender">
+                    <label for="r2">หญิง</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat">เพิ่ม</button>
+        </div>
+    </form>
+</div>
+
+<!-- Edit Modal -->
+<div id="edit_member" class="modal">
+    <form class="col s12" ng-submit="editMember(edit)">
+        <div class="modal-content">
+            <h4>แก้ไขข้อมูลสมาชิก</h4>
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="first_name" type="text" ng-model="edit.name" class="validate" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อ')"
+                            oninput="setCustomValidity('')">
+                        <label for="first_name">ชื่อ</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="last_name" type="text" ng-model="edit.surname" class="validate" required="required" oninvalid="this.setCustomValidity('กรุณากรอกนามสกุล')"
+                            oninput="setCustomValidity('')">
+                        <label for="last_name">นามสกุล</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" name="email" type="email" class="validate" ng-model="edit.email" required="required" oninvalid="this.setCustomValidity('กรุณาตรวจสอบอีเมลอีกครั้ง')"
+                            oninput="setCustomValidity('')">
+                        <label for="email">อีเมล</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input id="password" name="password" type="password" class="validate" ng-model="edit.password">
+                        <label for="password">รหัสผ่าน</label>
+                    </div>
+                    <input type="hidden" name="progarm" id="program">
+                </div>
+                <div class="row">
+                    <div ng-show="edit.level != 'ผู้ดูแลระบบ'" class="input-field col s12 m6">
+                        <i class="material-icons prefix">account_balance</i>
+                        <select name="education_plan" id="education_plan" ng-model="edit.education_plan" material-select>
+                            <option value="" disabled selected>เลือกแผนการศึกษา</option>
+                            <option ng-repeat="value in select_education">{{value}}</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">people</i>
+                        <select name="level" id="level" ng-model="edit.level" material-select>
+                            <option value="" disabled selected>เลือกระดับผู้ใช้</option>
+                            <option ng-repeat="value in level">{{value}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="material-icons" style="margin-left: 10px;">wc</i> &nbsp;
+                    <input class="with-gap" name="edit_gender" type="radio" id="male" value="ชาย" ng-model="edit.gender">
+                    <label for="male">ชาย</label>
+                    <input class="with-gap" name="edit_gender" type="radio" id="female" value="หญิง" ng-model="edit.gender">
+                    <label for="female">หญิง</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action  waves-effect waves-green btn-flat">แก้ไข</button>
+        </div>
+    </form>
+</div>
+<!-- Delete Modal -->
+<div id="remove_member" class="modal">
+    <form ng-submit="confirmDelete()">
+        <div class="modal-content">
+            <h4>ยืนยันการลบสมาชิก</h4>
+            <p>คุณต้องการลบสมาชิกใช่หรือไม่ ?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat">ลบ</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".modal").modal()
+    })
+
+</script>

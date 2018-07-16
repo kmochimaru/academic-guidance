@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meterial Design</title>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css'>
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/loader.css" rel="stylesheet">
+</head>
+
+<body ng-controller="mainController">
+
+    <!-- nav bar -->
+    <div class="nav" ng-if="profile.level=='นักเรียน'" ng-include="'user-pages/views/nav.html'"></div>
+    <div class="nav" ng-if="profile.level=='ผู้ดูแลระบบ'" ng-include="'admin-pages/views/nav.html'"></div>
+    <div class="nav" ng-if="profile.level==undefined" ng-include="'general/nav.html'"></div>
+    {{ profile.level }}
+    <!-- container -->
+    <div class="container row view" ng-view></div>
+    <!-- End container -->
+
+    <br><br><br><br><br><br><br><br><br><br>
+    <!-- footer -->
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">ระบบแนะนำการเข้าศึกษาต่อระดับปริญญาตรี</h5>
+                    <p class="grey-text text-lighten-4">
+                        การแนะแนวทางการศึกษา เป็นกระบวนการของการให้ความรู้ ความเข้าใจเกี่ยวกับทางด้านการศึกษา ซึ่งจะช่วยให้ผู้เรียนหรือผู้รับบริการทราบถึงแนวทางการเข้ารับการศึกษา
+                        แนวโน้มของการศึกษา โอกาสของการศึกษาในอนาคต ซึ่งจะช่วยให้ผู้เรียนหรือผู้รับบริการ
+                    </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">รายละเอียดต่างๆ</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">- ตรวจสอบคณะและหลักสูตรที่เปิดสอน</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">- รายงานผลการทดสอบจำแนกตามสาขาวิชา</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                rmult tak © 2017 Copyright
+                <a class="grey-text text-lighten-4 right" href=""></a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/1.0.0-beta.1/ng-google-chart.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="lib/materialize.js"></script>
+    <script type="text/javascript" src="lib/angular-materialize.js"></script>
+    <script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="lib/sweetalert.min.js"></script>
+    <script type="text/javascript" src="lib/initMaterialize.js"></script>
+    <script type="text/javascript" src="lib/dirPagination.js"></script>
+    <script type="text/javascript" src="js/RouteProvider.js"></script>
+    <script type="text/javascript" src="js/AuthenService.js"></script>
+    <script type="text/javascript" src="js/Service.js"></script>
+    <script type="text/javascript" src="js/HttpService.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>

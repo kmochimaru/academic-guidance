@@ -1,0 +1,30 @@
+<br>
+<br>
+<div class="col s12 m6 offset-m3 z-depth-4">
+    <h4 class="center-align">เข้าสู่ระบบ</h4>
+    <form ng-submit="loginMember(username, password)">
+        <div ng-show="!loading" class="row">
+            <div class="input-field col s6 offset-s3">
+                <i class="material-icons prefix">email</i>
+                <input type="email" name="username" id="username" ng-model="username" required="required" oninvalid="this.setCustomValidity('กรุณาตรวจสอบอีกเมลอีกครั้ง')"
+                    oninput="setCustomValidity('')">
+                <label for="username">อีเมล</label>
+            </div>
+        </div>
+        <div ng-show="!loading" class="row">
+            <div class="input-field col s6 offset-s3">
+                <i class="material-icons prefix">vpn_key</i>
+                <input type="password" name="password" id="password" ng-model="password" required="true" required="required" oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')"
+                    oninput="setCustomValidity('')">
+                <label for="password">รหัสผ่าน</label>
+            </div>
+        </div>
+        <div ng-show="!loading" class="row center-align">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="waves-effect waves-light btn">
+                เข้าสู่ระบบ
+            </button>
+        </div>
+        <div ng-show='loading' ng-init="loading = false" class="loader">Loading...</div>
+    </form>
+</div>

@@ -1,0 +1,274 @@
+<!-- left menu -->
+<div class="col s12 m5 l3 center-align" ng-include src="'admin-pages/views/left-menu.html'"></div>
+<!-- right content -->
+<div class="content col s12 m7 l9 left-align">
+    <form class="col s12" name="formEditMeber" ng-submit="updateProgram(edit)">
+        <h4 class="center-align">แก้ไขหลักสูตร</h4>
+        <input type="hidden" ng-model="edit.id">
+        <div class="row">
+            <div class="input-field col s12 m4">
+                <input id="program_id" type="text" ng-model="edit.program_id" required="required" oninvalid="this.setCustomValidity('กรุณากรอกรหัสหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="program_id">รหัสหลักสูตร</label>
+            </div>
+            <div class="input-field col s12 m8">
+                <input id="program_name" type="text" ng-model="edit.program_name" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="program_name">ชื่อหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m4">
+                <input id="program_year" type="text" ng-model="edit.program_year" required="required" oninvalid="this.setCustomValidity('กรุณากรอกข้อมูลปีการศึกษา')"
+                    oninput="setCustomValidity('')">
+                <label for="program_year">ข้อมูลปีการศึกษา</label>
+            </div>
+            <div class="input-field col s12 m4">
+                <select name="faculty_id" id="faculty_id" ng-model="edit.faculty_id" material-select>
+                    <option value="" disabled selected>เลือกคณะของหลักสูตร</option>
+                    <option ng-repeat="faculty in AllFaculty" value="{{ faculty.faculty_id }}">{{ faculty.faculty_name }}</option>
+                </select>
+            </div>
+            <div class="input-field col s12 m4">
+                <select name="education_level" id="education_level" ng-model="edit.education_level" material-select>
+                    <option value="" disabled selected>เลือกระดับการศึกษา</option>
+                    <option value="ปริญญาตรี">ปริญญาตรี</option>
+                    <option value="ปวส.">ปวส.</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="program_fullName_eng" type="text" ng-model="edit.program_fullName_eng" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (อังกฤษ)')"
+                    oninput="setCustomValidity('')">
+                <label for="program_fullName_eng">ชื่อหลักสูตรเต็ม (ภาษาอังกฤษ)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="program_fullName_th" type="text" ng-model="edit.program_fullName_th" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (ไทย)')"
+                    oninput="setCustomValidity('')">
+                <label for="program_fullName_th">ชื่อหลักสูตรเต็ม (ภาษาไทย)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="degree_fullName_eng" type="text" ng-model="edit.degree_fullName_eng" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (อังกฤษ)')"
+                    oninput="setCustomValidity('')">
+                <label for="degree_fullName_eng">ชื่อปริญญาเต็ม (ภาษาอังกฤษ)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="degree_fullName_th" type="text" ng-model="edit.degree_fullName_th" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (ไทย)')"
+                    oninput="setCustomValidity('')">
+                <label for="degree_fullName_th">ชื่อปริญญาเต็ม (ภาษาไทย)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="degree_acronym_eng" type="text" ng-model="edit.degree_acronym_eng" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (อังกฤษ)')"
+                    oninput="setCustomValidity('')">
+                <label for="degree_acronym_eng">ชื่อปริญญาย่อ (ภาษาอังกฤษ)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="degree_acronym_th" type="text" ng-model="edit.degree_acronym_th" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อหลักสูตรเต็ม (ไทย)')"
+                    oninput="setCustomValidity('')">
+                <label for="degree_acronym_th">ชื่อปริญญาย่อ (ภาษาไทย)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m8">
+                <textarea id="concerned" ng-model="edit.concerned" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกความเกี่ยวข้องกับหลักสูตร')"></textarea>
+                <label for="concerned">ความเกี่ยวข้องกับหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="branch_name" type="text" ng-model="edit.branch_name" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อสาขา')"
+                    oninput="setCustomValidity('')">
+                <label for="branch_name">ชื่อสาขา</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="branch_name_th" type="text" ng-model="edit.branch_name_th" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อสาขาวิชา (ไทย)')"
+                    oninput="setCustomValidity('')">
+                <label for="branch_name_th">ชื่อสาขาวิชา (ภาษาไทย)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="branch_name_eng" type="text" ng-model="edit.branch_name_eng" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อสาขาวิชา (อังกฤษ)')"
+                    oninput="setCustomValidity('')">
+                <label for="branch_name_eng">ชื่อสาขาวิชา (ภาษาอังกฤษ)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="branch_group" type="text" ng-model="edit.branch_group" required="required" oninvalid="this.setCustomValidity('กรุณากรอกชื่อกลุ่มสาขาวิชา')"
+                    oninput="setCustomValidity('')">
+                <label for="branch_group">ชื่อกลุ่มสาขาวิชา</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <input id="branch_year" type="text" ng-model="edit.branch_year" required="required" oninvalid="this.setCustomValidity('กรุณากรอกระยะเวลาของหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="branch_year">ระยะเวลาของหลักสูตร</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <select name="branch_type" id="branch_type" ng-model="edit.branch_type" material-select>
+                    <option value="" disabled selected>ประเภทของหลักสูตร</option>
+                    <option value="ปกติ">ปกติ</option>
+                    <option value="สมทบ">สมทบ</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <select name="program_inter" id="program_inter" ng-model="edit.program_inter" material-select>
+                    <option value="" disabled selected>ความเป็นสากลของหลักสูตร</option>
+                    <option value="หลักสูตรภาษาไทย">หลักสูตรภาษาไทย</option>
+                    <option value="หลักสูตรภาษาต่างประเทศ">หลักสูตรภาษาต่างประเทศ</option>
+                </select>
+            </div>
+            <div class="input-field col s12 m6">
+                <select name="semester" id="semester" ng-model="edit.semester" material-select>
+                    <option value="" disabled selected>จำนวนภาคการศึกษาต่อปี</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <input id="program_group" type="text" ng-model="edit.program_group" required="required" oninvalid="this.setCustomValidity('กรุณากรอกกลุ่มหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="program_group">กลุ่มหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m8">
+                <textarea id="credit" ng-model="edit.credit" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกหน่วยกิต')"></textarea>
+                <label for="credit">หน่วยกิต</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m3">
+                <input id="eng_test" type="number" ng-model="edit.eng_test" required="required" oninvalid="this.setCustomValidity('กรุณากรอกคะนนสอบภาษาอังกฤษ')"
+                    oninput="setCustomValidity('')">
+                <label for="eng_test">สอบภาษาอังกฤษ</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <input id="knowledge_processing" type="number" ng-model="edit.knowledge_processing" required="required" oninvalid="this.setCustomValidity('กรุณากรอกคะแนนสอบประมวลผลความรู้')"
+                    oninput="setCustomValidity('')">
+                <label for="knowledge_processing">สอบประมวลผลความรู้</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <input id="qualification_exam" type="number" ng-model="edit.qualification_exam" required="required" oninvalid="this.setCustomValidity('กรุณากรอกคะแนนวัดคุณสมบัติ')"
+                    oninput="setCustomValidity('')">
+                <label for="qualification_exam">สอบวัดคุณสมบัติ</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <input id="graduation" type="text" ng-model="edit.graduation" required="required" oninvalid="this.setCustomValidity('กรุณากรอกเกรดต่ำสุดที่สามารถจบิ')"
+                    oninput="setCustomValidity('')">
+                <label for="graduation">เกรดต่ำสุดที่สามารถจบ</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+                <label for="date_program">วันที่สภามหาวิทยาลัยอนุมัติหลักสูตรครั้งแรก</label>
+                <input input-date type="text" name="date_program" id="date_program" ng-model="edit.date_program" container="" format="yyyy-mm-dd"
+                    months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+                    weekdays-letter="{{ weekdaysLetter }}" disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today"
+                    first-day="1" clear="clear" close="close" select-years="15" />
+            </div>
+            <div class="col s12 m6">
+                <label for="date_first_confirm">วันที่ กพ. รับรองหลักสูตรครั้งแรก</label>
+                <input input-date type="text" name="date_first_confirm" id="date_first_confirm" ng-model="edit.date_first_confirm" container=""
+                    format="yyyy-mm-dd" months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}"
+                    weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" disable="disable" min="{{ minDate }}"
+                    max="{{ maxDate }}" today="today" first-day="1" clear="clear" close="close" select-years="15" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+                <label for="date_ohec">วันที่รับรองหลักสูตรโดย สกอ</label>
+                <input input-date type="text" name="date_ohec" id="date_ohec" ng-model="edit.date_ohec" container="" format="yyyy-mm-dd"
+                    months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+                    weekdays-letter="{{ weekdaysLetter }}" disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today"
+                    first-day="1" clear="clear" close="close" select-years="15" />
+            </div>
+            <div class="col s12 m6">
+                <label for="date_pcru">วันที่สภาวิชาการให้ความเห็นชอบหลักสูตร</label>
+                <input input-date type="text" name="date_pcru" id="date_pcru" ng-model="edit.date_pcru" container="" format="yyyy-mm-dd"
+                    months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+                    weekdays-letter="{{ weekdaysLetter }}" disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today"
+                    first-day="1" clear="clear" close="close" select-years="15" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+                <label for="date_pc">วันที่สภาวิชาชีพให้การรับรอง (ถ้ามี)</label>
+                <input input-date type="text" name="date_pc" id="date_pc" ng-model="edit.date_pc" container="" format="yyyy-mm-dd" months-full="{{ month }}"
+                    months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}"
+                    disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1" clear="clear" close="close"
+                    select-years="15" />
+            </div>
+            <div class="col s12 m6">
+                <label for="date_update">ปรับปรุงครั้งล่าสุด</label>
+                <input input-date type="text" name="date_update" id="date_update" ng-model="edit.date_update" container="" format="yyyy-mm-dd"
+                    months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}"
+                    weekdays-letter="{{ weekdaysLetter }}" disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today"
+                    first-day="1" clear="clear" close="close" select-years="15" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="philosophy" type="text" ng-model="edit.philosophy" required="required" oninvalid="this.setCustomValidity('กรุณากรอกปรัชญาของหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="philosophy">ปรัชญาของหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <textarea id="target" ng-model="edit.target" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกวัตถุประสงค์ของหลักสูตร')"></textarea>
+                <label for="target">วัตถุประสงค์ของหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="expenses" type="number" ng-model="edit.expenses" required="required" oninvalid="this.setCustomValidity('กรุณากรอกค่าใช้จ่ายในหลักสูตร')"
+                    oninput="setCustomValidity('')">
+                <label for="expenses">ค่าใช้จ่ายในหลักสูตร</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <textarea id="property" ng-model="edit.property" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกคุณสมบัติผู้เข้าศึกษา')"></textarea>
+                <label for="property">คุณสมบัติผู้เข้าศึกษา</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m5">
+                <input type="text" name="url" id="url" ng-model="edit.url">
+                <label for="input_text">ลิ้งดาวโหลด PDF</label>
+            </div>
+        </div>
+        <div class="row center-align">
+            <button type="reset" class="btn red waves-effect waves-light">ยกเลิก</button>
+            <button type="submit" class="btn waves-effect waves-light">แก้ไข</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".modal").modal()
+        $('select').material_select();
+    })
+
+</script>

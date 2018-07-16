@@ -1,0 +1,161 @@
+<br>
+<br>
+<h4 class="center-align">รายละเอียด รหัสหลักสูตร {{ program_id }} </h4>
+<div class="col">
+    <table class="highlight bordered left hoverable">
+        <thead>
+            <th class="center-align" style="width: 220px;">หัวข้อ</th>
+            <th class="center-align">รายละเอียด</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>รหัสหลักสูตร</b></td>
+                <td>{{ detail.program_id }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อหลักสูตร</b></td>
+                <td>{{ detail.program_name }}</td>
+            </tr>
+            <tr>
+                <td><b>ข้อมูลปีการศึกษา</b></td>
+                <td>{{ detail.program_year }}</td>
+            </tr>
+            <tr>
+                <td><b>คณะของหลักสูตร</b></td>
+                <td>{{ detail.faculty_name }}</td>
+            </tr>
+            <tr>
+                <td><b>ระดับการศึกษา</b></td>
+                <td>{{ detail.education_level }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อหลักสูตร (เต็มภาษาอังกฤษ)</b></td>
+                <td>{{ detail.program_fullName_eng }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อหลักสูตร (เต็มภาษาไทย)</b></td>
+                <td>{{ detail.program_fullName_th }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อปริญญา (เต็มภาษาอังกฤษ)</b></td>
+                <td>{{ detail.degree_fullName_eng }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อปริญญา (เต็มภาษาไทย)</b></td>
+                <td>{{ detail.degree_fullName_th }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อปริญญา (ย่อภาษาอังกฤษ)</b></td>
+                <td>{{ detail.degree_acronym_eng }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อปริญญา (ย่อภาษาไทย)</b></td>
+                <td>{{ detail.degree_acronym_th }}</td>
+            </tr>
+            <tr>
+                <td><b>ความเกี่ยวข้องกับหลักสูตร</b></td>
+                <td>{{ detail.concerned }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อสาขา<b></td>
+                <td>{{ detail.branch_name }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อสาขาวิชาภาษาไทย</b></td>
+                <td>{{ detail.branch_name_th }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อสาขาวิชาภาษาอังกฤษ</b></td>
+                <td>{{ detail.branch_name_eng }}</td>
+            </tr>
+            <tr>
+                <td><b>ชื่อกลุ่มสาขาวิชา</b></td>
+                <td>{{ detail.branch_group }}</td>
+            </tr>
+            <tr>
+                <td><b>ระยะเวลาของหลักสูตร</b></td>
+                <td>{{ detail.branch_year }}</td>
+            </tr>
+            <tr>
+                <td><b>ประเภทหลักสูตร</b></td>
+                <td>{{ detail.branch_type }}</td>
+            </tr>
+            <tr>
+                <td><b>ความเป็นสากลของหลักสูตร</b></td>
+                <td>{{ detail.program_inter }}</td>
+            </tr>
+            <tr>
+                <td><b>จำนวนภาคการศึกษาต่อปี</b></td>
+                <td>{{ detail.semester }}</td>
+            </tr>
+            <tr>
+                <td><b>กลุ่มหลักสูตร</b></td>
+                <td>{{ detail.program_group }}</td>
+            </tr>
+            <tr>
+                <td><b>หน่วยกิต</b></td>
+                <td>{{ detail.credit }}</td>
+            </tr>
+            <tr>
+                <td><b>สอบภาษาอังกฤษ</b></td>
+                <td>{{ detail.eng_test }}</td>
+            </tr>
+            <tr>
+                <td><b>สอบประมวลผลความรู้</b></td>
+                <td>{{ detail.knowledge_processing }}</td>
+            </tr>
+            <tr>
+                <td><b>สอบวัดคุณสมบัติ</b></td>
+                <td>{{ detail.qualification_exam }}</td>
+            </tr>
+            <tr>
+                <td><b>เกรดต่ำสุดที่สามารถจบ</b></td>
+                <td>{{ detail.graduation }}</td>
+            </tr>
+            <tr>
+                <td><b>วันที่สภามหาวิทยาลัยอนุมัติหลักสูตรครั้งแรก</b></td>
+                <td>{{ detail.date_program }}</td>
+            </tr>
+            <tr>
+                <td><b>วันที่ กพ. รับรองหลักสูตรครั้งแรก</b></td>
+                <td>{{ detail.date_first_confirm }}</td>
+            </tr>
+            <tr>
+                <td><b>วันที่รับรองหลักสูตรโดย สกอ</b></td>
+                <td>{{ detail.date_ohec }}</td>
+            </tr>
+            <tr>
+                <td><b>วันที่สภาวิชาการให้ความเห็นชอบหลักสูตร</b></td>
+                <td>{{ detail.date_pcru }}</td>
+            </tr>
+            <tr>
+                <td><b>วันที่สภาวิชาชีพให้การรับรอง (ถ้ามี)</b></td>
+                <td>{{ detail.date_pc }}</td>
+            </tr>
+            <tr>
+                <td><b>ปรับปรุงครั้งล่าสุด</b></td>
+                <td>{{ detail.date_update }}</td>
+            </tr>
+            <tr>
+                <td><b>ปรัชญาของหลักสูตร</b></td>
+                <td>{{ detail.philosophy }}</td>
+            </tr>
+            <tr>
+                <td><b>วัตถุประสงค์ของหลักสูตร</b></td>
+                <td>{{ detail.target }}</td>
+            </tr> 
+            <tr>
+                <td><b>ค่าใช้จ่ายในหลักสูตร</b></td>
+                <td>{{ detail.expenses }}</td>
+            </tr>
+            <tr>
+                <td><b>คุณสมบัติผู้เข้าศึกษา</b></td>
+                <td>{{ detail.property }}</td>
+            </tr>
+            <tr>
+                <td><b>ไฟล์ PDF</b></td>
+                <td><a href="./download/{{ detail.url }}">ดาวน์โหลด</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

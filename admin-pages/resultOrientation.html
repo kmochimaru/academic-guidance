@@ -1,0 +1,192 @@
+<!-- left menu -->
+<div class="col s12 m5 l3 center-align" ng-include src="'admin-pages/views/left-menu.html'"></div>
+<!-- right content -->
+<div class="content col s12 m7 l9 center-align">
+    <div>
+        <h3>แปลผลความถนัดทางอาชีพ</h3>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s8 m6 l5">
+                        <i class="material-icons prefix">search</i>
+                        <input id="icon_prefix" type="text" placeholder="ค้นหาบุคลิกภาพ" ng-model="search">
+                    </div>
+                    <div class="col s2 m6 l7 right-align" style="padding-right: 60px;">
+                        <button class="btn-floating btn-large pink waves-effect modal-trigger" href="#add_guidance">
+                            <i class="large material-icons">person_add</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="highlight bordered hoverable responsive-table">
+            <thead>
+                <tr>
+                    <th class="center-align" ng-click="sort('title')">บุคลิกภาพ
+                        <i class="material-icons" ng-show="sortKey=='title'" ng-if="reverse==true">arrow_drop_up</i>
+                        <i class="material-icons" ng-show="sortKey=='title'" ng-if="reverse==false">arrow_drop_down</i>
+                    </th>
+                    <th class="center-align">แก้ไข/ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="result in result2 | orderBy:sortKey:reverse | filter:search | itemsPerPage:size">
+                    <td>{{ result.title }}</td>
+                    <td class="center-align">
+                        <button class="btn-floating waves-effect tooltipped modal-trigger" href="#edit_guidance" ng-click="detailGuidance(result.guidance_id)">
+                            <i class="large material-icons">mode_edit</i>
+                        </button>
+                        <button class="btn-floating red waves-effect tooltipped modal-trigger" href="#remove_guidance" ng-click="deleteGuidance(result.guidance_id)">
+                            <i class="large material-icons">remove</i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="result1 == 0">
+                    <td colspan="2" class="data-empty">
+                        <h4 class="red-text">ยังไม่มีข้อมูลแปลผลแบบทดสอบที่ 2</h4>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <dir-pagination-controls class="right" max-size="5" direction-links="true" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+        </dir-pagination-controls>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div id="add_guidance" class="modal">
+    <form class="col s12" name="formAddGuidance" ng-submit="addGuidance(guidance)">
+        <div class="modal-content">
+            <h4>เพิ่มคำแนะนำ</h4>
+            <div class="row">
+                <input type="hidden" name="guidanceId" id="guidanceId">
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <input id="title" type="text" ng-model="guidance.title" required="required" oninvalid="this.setCustomValidity('กรุณากรอกหัวข้อ')"
+                            oninput="setCustomValidity('')">
+                        <label for="title">หัวข้อ</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="general" ng-model="guidance.general" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกลักษณะโดยทั่วไป')"></textarea>
+                        <label for="general">ลักษณะโดยทั่วไป</label>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="education" ng-model="guidance.education" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกสาขาวิชาที่อาจเลือกศึกษา')"></textarea>
+                        <label for="education">สาขาวิชาที่อาจเลือกศึกษา</label>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="vocational" ng-model="guidance.vocational" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกอาชีพที่สอดคล้องกับบุคลิกภาพ')"></textarea>
+                        <label for="vocational">อาชีพที่สอดคล้องกับบุคลิกภาพ</label>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="personal_social" ng-model="guidance.personal_social" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกลักษะเด่นของบุคลิกภาพ')"></textarea>
+                        <label for="personal_social">ลักษะเด่นของบุคลิกภาพ</label>
+                    </div>
+                </div> -->
+                <input type="hidden" ng-model="guidance.education" ng-init="guidance.education='-'">
+                <input type="hidden" ng-model="guidance.personal_social" ng-init="guidance.personal_social='-'">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="type" id="type" ng-model="guidance.type" material-select>
+                            <option value="" disabled selected>เลือกแบบทดสอบ</option>
+                            <option value="test1">แบบทดสอบที่ 1</option>
+                            <option value="test2">แบบทดสอบที่ 2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">เพิ่ม</button>
+        </div>
+    </form>
+</div>
+
+<!-- Edit Modal -->
+<div id="edit_guidance" class="modal">
+    <form class="col s12" ng-submit="editGuidance(edit)">
+        <div class="modal-content">
+            <h4>แก้ไขคำแนะนำ</h4>
+            <div class="row">
+                <input type="hidden" name="guidanceId" id="guidanceId">
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <input id="title" type="text" ng-model="edit.title" required="required" oninvalid="this.setCustomValidity('กรุณากรอกหัวข้อ')"
+                            oninput="setCustomValidity('')">
+                        <label for="title">หัวข้อ</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="general" ng-model="edit.general" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกลักษณะโดยทั่วไป')"></textarea>
+                        <label for="general">ลักษณะโดยทั่วไป</label>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="education" ng-model="edit.education" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกสาขาวิชาที่อาจเลือกศึกษา')"></textarea>
+                        <label for="education">สาขาวิชาที่อาจเลือกศึกษา</label>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="vocational" ng-model="edit.vocational" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกอาชีพที่สอดคล้องกับบุคลิกภาพ')"></textarea>
+                        <label for="vocational">อาชีพที่สอดคล้องกับบุคลิกภาพ</label>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="input-field col s12 m12">
+                        <textarea id="personal_social" ng-model="edit.personal_social" required="required" class="materialize-textarea" oninvalid="this.setCustomValidity('กรุณากรอกลักษะเด่นของบุคลิกภาพ')"></textarea>
+                        <label for="personal_social">ลักษะเด่นของบุคลิกภาพ</label>
+                    </div>
+                </div> -->
+                <input type="hidden" ng-model="edit.education" ng-init="edit.education='-'">
+                <input type="hidden" ng-model="edit.personal_social" ng-init="edit.personal_social='-'">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select name="type" id="type" ng-model="edit.type" material-select>
+                            <option value="" disabled selected>เลือกแบบทดสอบ</option>
+                            <option value="test1">แบบทดสอบที่ 1</option>
+                            <option value="test2">แบบทดสอบที่ 2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action  waves-effect waves-green btn-flat">แก้ไข</button>
+        </div>
+    </form>
+</div>
+<!-- Delete Modal -->
+<div id="remove_guidance" class="modal">
+    <form ng-submit="confirmDelete()">
+        <div class="modal-content">
+            <h4>ยืนยันการลบการแนะนำ</h4>
+            <p>คุณต้องการลบการแนะนี้ใช่หรือไม่ ?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action modal-close waves-effect waves-red btn-flat">ยกเลิก</button>
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat">ลบ</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".modal").modal()
+    })
+
+</script>

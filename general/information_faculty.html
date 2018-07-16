@@ -1,0 +1,16 @@
+<br><br>
+<h4 class="center-align">ข้อมูลคณะ</h4>
+<div class="col m6 offset-m3">
+    <table class="highlight bordered centered hoverable responsive-table">
+        <thead>
+            <th>รหัสคณะ</th>
+            <th>ชื่อคณะ</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="faculty in AllFaculty">
+                <td>{{ faculty.faculty_id }}</td>
+                <td>{{ faculty.faculty_name }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+<!-- nav bar -->
+<nav>
+    <div class="nav-wrapper blue">
+        <a href="#/" class="brand-logo">&nbsp;หน้าแรก</a>
+        <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <!-- laptop nav -->
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#dashboard">หน้าหลัก</a></li>
+            <li><a href="#information_faculty">คณะ</a></li>
+            <li><a href="#information_program">หลักสูตร</a></li>
+            <li><a class="dropdown-button" data-activates="profile_menu" href="#"><i class="material-icons right">aaccount_circle</i>ยินดีต้อนรับ {{ profile.name }} {{profile.surname}}</a></li>
+        </ul>
+    </div>
+</nav>
+  <!-- mobile nav -->
+  <ul class="side-nav" id="mobile">
+    <li><a class="waves-effect" href="#adminProfile"><i class="material-icons">account_box</i>ยินดีต้อนรับ {{ profile.name }} {{profile.surname}}</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect" href="#"><i class="material-icons">home</i>หน้าแรก</a></li>
+    <li><a class="waves-effect" href="#dashboard"><i class="material-icons">dashboard</i>หน้าหลัก</a></li>
+    <li><a class="waves-effect" href="#information_faculty"><i class="material-icons">library_books</i>คณะ</a></li>
+    <li><a class="waves-effect" href="#information_program"><i class="material-icons">library_books</i>หลักสูตร</a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="#logout"><i class="material-icons">power_settings_new</i>ออกระบบ</a></li>
+</ul>
+<!-- Dropdown Structure Laptop -->
+<ul id="profile_menu" class="dropdown-content">
+    <li><a href="#adminProfile"><i class="material-icons">edit</i>แก้ไขข้อมูล</a></li>
+    <li class="divider"></li>
+    <li><a href="#logout"><i class="material-icons">power_settings_new</i>ออกระบบ</a></li>
+</ul>
+
+<script>
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+</script>

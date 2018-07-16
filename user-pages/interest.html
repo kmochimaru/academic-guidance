@@ -1,0 +1,96 @@
+<!-- left menu -->
+<div class="col s12 m5 l3 center-align" ng-include src="'user-pages/views/left-menu.html'"></div>
+<!-- right content -->
+<div class="content col s12 m7 l9 center-align">
+    <h3>
+        <u>แบบทดสอบความสนใจทางด้านอาชีพ</u>
+    </h3>
+    <form ng-submit="analyze()">
+        <table class="highlight bordered hoverable">
+            <thead>
+                <tr>
+                    <th class="center-align">คำถามทั้งหมด 54 ข้อ</th>
+                    <th class="center-align">ชอบ</th>
+                    <th class="center-align">ไม่แน่ใจ</th>
+                    <th class="center-align">ไม่ชอบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="test in test1">
+                    <td class="left" style="margin-left: 70px;">
+                        {{ test.ordinal_numbers }}. {{ test.proposition }}
+                    </td>
+                    <td class="center-align">
+                        <input ng-click="getRadio(test.ordinal_numbers, choice)" name="Group{{ test.ordinal_numbers }}" type="radio" value="A" id="ชอบ{{ test.ordinal_numbers }}"
+                            ng-model="choice" required/>
+                        <label for="ชอบ{{ test.ordinal_numbers }}"></label>
+                    </td>
+                    <td class="center-align">
+                        <input ng-click="getRadio(test.ordinal_numbers, choice)" name="Group{{ test.ordinal_numbers }}" type="radio" value="B" id="ไม่แน่ใจ{{ test.ordinal_numbers }}"
+                            ng-model="choice" required/>
+                        <label for="ไม่แน่ใจ{{ test.ordinal_numbers }}"></label>
+                    </td>
+                    <td class="center-align">
+                        <input ng-click="getRadio(test.ordinal_numbers, choice)" name="Group{{ test.ordinal_numbers }}" type="radio" value="X" id="ไม่ชอบ{{ test.ordinal_numbers }}"
+                            ng-model="choice" required/>
+                        <label for="ไม่ชอบ{{ test.ordinal_numbers }}"></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <button type="submit" class="btn waves-effect">
+            ส่งแบบทดสอบ
+        </button>
+    </form>
+
+    <!-- Modal Structure -->
+    <div id="result" class="modal bottom">
+        <div class="modal-content">
+            <h4>ผลการทดสอบความสนใจทางอาชีพ</h4>
+            <table>
+                <thead>
+                    <th class="center-align">บุคลิกภาพทั้ง 6 แบบ</th>
+                    <th class="center-align">คำอธิบาย</th>
+                    <th class="center-align">คะแนน</th>
+                    <th class="center-align">เปอร์เซ็น</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="detail in details | orderBy:'percent':true">
+                        <td>{{ detail.title }}</td>
+                        <td>{{ detail.description }}</td>
+                        <td class="center-align">{{ detail.point }}</td>
+                        <td class="center-align">
+                            <b>{{ detail.percent | number: 2}} %</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h4>รายละเอียดการแปลผลแบบทดสอบ</h4>
+            <h5>{{ result.title }}</h5>
+            <div class="left-align">
+                <p>
+                    <b>ลักษณะโดยทั่วไป</b> {{ result.general }}
+                    <br>
+                    <b>ลักษะเด่นของบุคลิกภาพ</b> {{ result.personal_social }}
+                    <br>
+                    <b>อาชีพที่สอดคล้องกับบุคลิกภาพ</b> {{ result.vocational }}
+                    <br>
+                    <b>สาขาวิชาที่อาจเลือกศึกษา</b> {{ result.education }}
+                </p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-action modal-close waves-effect waves-red btn-flat">ปิด</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
+</script>
